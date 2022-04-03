@@ -1,0 +1,151 @@
+<html>
+
+<head>
+    <title>calculator</title>
+    <style>
+        html,
+        body,
+        * {
+            padding: 0px;
+            margin: auto;
+            user-select: none;
+            font-family: 'Black Ops One', cursive;
+        }
+        
+        .contant {
+            background-image: linear-gradient(to right, #9c7ecf, #f2709c 90%);
+            height: 100%;
+        }
+        
+        table {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+            top: 40px;
+            border-collapse: collapse;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            font-family: sans-serif;
+            font-size: 35px;
+            box-shadow: 10px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        th,
+        td {
+            padding: 20px 40px 20px 40px;
+        }
+        
+        td {
+            text-align: center;
+            transition: 0.3s all;
+        }
+        
+        td:hover {
+            background-color: rgba(0, 255, 0, 0.2);
+            color: black;
+        }
+        
+        td:active {
+            transform: scale(0.8);
+        }
+        
+        input {
+            text-align: right;
+            font-weight: normal;
+            font-size: 37px;
+            width: 450px;
+            border-radius: 5px;
+            color: white;
+            background: black;
+            border-collapse: collapse;
+            padding: 20px 40px 20px 40px;
+            border: none;
+        }
+        
+        td {
+            color: #7db471;
+            cursor: pointer;
+        }
+        
+        .last {
+            color: red;
+        }
+        
+        .enter.scale {
+            transform: scale(0.8);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="contant">
+        <table>
+            <tr>
+                <th colspan="4"><input type="text" placeholder="0" id="outputscreen" disabled></th>
+            </tr>
+            <tr>
+                <td id="btn" onclick="myFunction()">C</td>
+                <td id="btn" onclick="del()">D</td>
+                <td id="btn" onclick="display('%')">%</td>
+                <td id="btn" class="last" onclick="display('/')"><span>&#247;</span></td>
+            </tr>
+            <tr>
+                <td onclick="display('7')">7</td>
+                <td onclick="display('8')">8</td>
+                <td onclick="display('9')">9</td>
+                <td id="btn" class="last" onclick="display('*')"><span>&#215;</span></td>
+            </tr>
+            <tr>
+                <td id="btn" onclick="display('4')">4</td>
+                <td id="btn" onclick="display('5')">5</td>
+                <td id="btn" onclick="display('6')">6</td>
+                <td id="btn" class="last" onclick="display('-')">-</td>
+            </tr>
+            <tr>
+                <td id="btn" onclick="display('3')">3</td>
+                <td id="btn" onclick="display('2')">2</td>
+                <td id="btn" onclick="display('1')">1</td>
+                <td id="btn" class="last" onclick="display('+')">+</td>
+            </tr>
+            <tr>
+                <td id="btn" onclick="display('.')">.</td>
+                <td id="btn" onclick="display('0')">0</td>
+                <td id="btn" class="last enter" colspan="2" onclick="calculate()">=</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        let output = document.getElementById('outputscreen');
+
+        function display(number) {
+            document.getElementById('btn').classList.add('scale')
+            output.value += number;
+        }
+
+        document.addEventListener('keypress', function(event) {
+            if (event.keyCode === 13) {
+                calculate();
+            }
+        });
+
+
+        function calculate() {
+            try {
+                output.value = eval(output.value);
+            } catch (err) {
+                alert('you enter wrong value');
+            }
+        }
+
+        function del() {
+            output.value = output.value.slice(0, -1);
+        }
+
+        function myFunction() {
+            output.value = "";
+        }
+    </script>
+</body>
+
+</html>
